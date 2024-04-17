@@ -33,7 +33,7 @@ print(classification_report(y_test, y_pred))
 
 
 classifier = GaussianNB()
-X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets])
+X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets]).toarray()
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
