@@ -1,3 +1,7 @@
+#IFT3335
+#TP2
+#This part of the code is from the program given on Git, some of the functionalities are used
+
 import copy
 from tqdm import tqdm
 import warnings

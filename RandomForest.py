@@ -1,3 +1,7 @@
+#IFT3335
+#TP2
+#Classified with random tree
+
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
@@ -17,12 +21,12 @@ vec_Count = CountVectorizer()
 vec_tfidf = TfidfVectorizer()
 
 
-
+#pretraitement
 preprocessor = Preprocessor('remove_stopwords', 'stem')
 cleanTweets = Preprocessor.clean(preprocessor, tweets)
 
 
-
+#basic classifier
 classifier = RandomForestClassifier()
 X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets])
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)
@@ -34,7 +38,7 @@ print("\nClassification Report:")
 print(classification_report(y_test, y_pred, zero_division=0))
 
 
-
+#classifier with max depth limited
 classifier = RandomForestClassifier(max_depth=5, random_state=30)
 X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets])
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)
@@ -48,6 +52,7 @@ print(classification_report(y_test, y_pred, zero_division=0))
 
 
 
+#classifier with max tree limited
 classifier = RandomForestClassifier(n_estimators=100, random_state=30)
 X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets])
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)
@@ -73,6 +78,8 @@ print("\nClassification Report:")
 print(classification_report(y_test, y_pred, zero_division=0))
 
 
+
+#classifier with both
 classifier = RandomForestClassifier(max_depth=5, n_estimators=100, random_state=30)
 X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets])
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)

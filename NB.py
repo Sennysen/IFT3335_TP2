@@ -1,3 +1,7 @@
+# IFT3335
+# TP2
+# Classified with naif bayesian
+
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB, GaussianNB
 from sklearn.model_selection import train_test_split
@@ -17,9 +21,13 @@ vec_tfidf = TfidfVectorizer()
 
 
 
+#pretraitement
 preprocessor = Preprocessor('remove_stopwords', 'stem')
 cleanTweets = Preprocessor.clean(preprocessor, tweets)
 
+
+
+# Classified with multinomial
 classifier = MultinomialNB()
 X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets])
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)
@@ -32,6 +40,7 @@ print(classification_report(y_test, y_pred))
 
 
 
+# Classified with Gaussian
 classifier = GaussianNB()
 X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets]).toarray()
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)

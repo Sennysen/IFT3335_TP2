@@ -1,3 +1,7 @@
+#IFT3335
+#TP2
+#Classified with SVM with RBF kernel, with pretreatment tests
+
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
@@ -17,7 +21,7 @@ vec_tfidf = TfidfVectorizer()
 
 
 
-
+# non pretreatement, with count and TFIDF
 X = vec_Count.fit_transform(tweets)
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)
 classifier.fit(X_train, y_train)
@@ -49,6 +53,7 @@ print(classification_report(y_test, y_pred))
 
 
 
+# lemmatization, with count and TFIDF
 preprocessor = Preprocessor('remove_stopwords', 'lemmatize')
 cleanTweets = Preprocessor.clean(preprocessor, tweets)
 
@@ -90,6 +95,7 @@ print(classification_report(y_test, y_pred))
 
 
 
+# stemming, with count and TFIDF
 preprocessor = Preprocessor('remove_stopwords', 'stem')
 cleanTweets = Preprocessor.clean(preprocessor, tweets)
 
@@ -128,7 +134,7 @@ print(classification_report(y_test, y_pred))
 
 
 
-
+# only stop word removal, with count and TFIDF
 preprocessor = Preprocessor('remove_stopwords')
 cleanTweets = Preprocessor.clean(preprocessor, tweets)
 

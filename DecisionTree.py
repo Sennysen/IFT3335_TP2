@@ -1,3 +1,7 @@
+#IFT3335
+#TP2
+#Classified with decision tree
+
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
@@ -15,12 +19,12 @@ vec_Count = CountVectorizer()
 vec_tfidf = TfidfVectorizer()
 
 
-
+#pretraitement
 preprocessor = Preprocessor('remove_stopwords', 'stem')
 cleanTweets = Preprocessor.clean(preprocessor, tweets)
 
 
-
+#basic classifier
 classifier = DecisionTreeClassifier()
 X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets])
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)
@@ -34,7 +38,7 @@ print(classification_report(y_test, y_pred))
 
 
 
-
+#Decision tree with max depth
 classifier = DecisionTreeClassifier(max_depth=3)
 X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets])
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)
@@ -48,7 +52,7 @@ print(classification_report(y_test, y_pred))
 
 
 
-
+#Decision tree with gini
 classifier = DecisionTreeClassifier(criterion='gini')
 X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets])
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)
@@ -60,6 +64,7 @@ print("\nClassification Report:")
 print(classification_report(y_test, y_pred))
 
 
+#Decision tree with entropy
 classifier = DecisionTreeClassifier(criterion='entropy')
 X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets])
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)

@@ -1,3 +1,7 @@
+#IFT3335
+#TP2
+#Classified with perceptron and MLP
+
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.linear_model import Perceptron
 from sklearn.model_selection import train_test_split
@@ -18,12 +22,13 @@ vec_Count = CountVectorizer()
 vec_tfidf = TfidfVectorizer()
 
 
-
+#pretraitement
 preprocessor = Preprocessor('remove_stopwords', 'stem')
 cleanTweets = Preprocessor.clean(preprocessor, tweets)
 
 
 
+#basic classifier
 classifier = Perceptron(random_state=30)
 X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets])
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)
@@ -35,7 +40,7 @@ print("\nClassification Report:")
 print(classification_report(y_test, y_pred))
 
 
-
+#MLP with 2 hidden layers: 30, 20, and activation function is relu
 classifier = MLPClassifier(hidden_layer_sizes=(30, 20), activation='relu', random_state=30)
 X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets])
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)
@@ -48,6 +53,7 @@ print(classification_report(y_test, y_pred))
 
 
 
+#MLP with 3 hidden layers: 100, 50, 20, and activation function is relu
 classifier = MLPClassifier(hidden_layer_sizes=(100, 50, 20), activation='relu', random_state=30)
 X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets])
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)
@@ -61,6 +67,7 @@ print(classification_report(y_test, y_pred))
 
 
 
+#MLP with 2 hidden layers: 10, 5, and activation function is relu
 classifier = MLPClassifier(hidden_layer_sizes=(10, 5), activation='relu', random_state=30)
 X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets])
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)
@@ -74,6 +81,8 @@ print(classification_report(y_test, y_pred))
 
 
 
+
+#MLP with 2 hidden layers: 10, 5, and activation function is logistic
 classifier = MLPClassifier(hidden_layer_sizes=(10, 5), activation='logistic', random_state=30)
 X = vec_tfidf.fit_transform([' '.join(inner_list) for inner_list in cleanTweets])
 X_train, X_test, y_train, y_test = train_test_split(X, label, test_size=0.3, random_state=30)
